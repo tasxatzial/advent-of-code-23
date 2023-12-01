@@ -14,7 +14,19 @@
 
 (def memoized-input-file->calibration-lines (memoize input-file->calibration-lines))
 
+; --------------------------
+; problem 1
+
+(defn get-first-num
+  [calibration-line]
+  (Integer/parseInt (re-find #"\d" calibration-line)))
+
+(defn extract-calibration-value
+  [calibration-line]
+  (let [first-num (get-first-num calibration-line)
+        last-num (get-first-num (clojure.string/reverse calibration-line))]
+    (+ (* 10 first-num) last-num)))
+
 (defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+  []
+  (println 1))
