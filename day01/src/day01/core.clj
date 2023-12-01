@@ -27,6 +27,15 @@
         last-num (get-first-num (clojure.string/reverse calibration-line))]
     (+ (* 10 first-num) last-num)))
 
+; --------------------------
+; results
+
+(defn day01-1
+  []
+  (->> (memoized-input-file->calibration-lines)
+       (map extract-calibration-value)
+       (reduce +)))
+
 (defn -main
   []
-  (println 1))
+  (println (day01-1)))
