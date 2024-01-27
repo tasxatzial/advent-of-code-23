@@ -6,14 +6,14 @@
 
 (def input-file "resources\\input.txt")
 
-(defn input-file->calibration-lines
+(defn parse-file
   "Reads and parses the input file into a vector of strings."
   []
   (-> input-file
       slurp
       clojure.string/split-lines))
 
-(def memoized-input-file->calibration-lines (memoize input-file->calibration-lines))
+(def memoized-input-file->calibration-lines (memoize parse-file))
 
 ; --------------------------
 ; problem 1
