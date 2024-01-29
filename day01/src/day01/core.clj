@@ -23,7 +23,7 @@
   [calibration-line]
   (Integer/parseInt (re-find #"\d" calibration-line)))
 
-(defn p1_extract-calibration-value
+(defn p1_compute-calibration-value
   "Given a line, it returns the calibration value."
   [calibration-line]
   (let [first-val (p1_get-first-value calibration-line)
@@ -33,22 +33,22 @@
 ; --------------------------
 ; problem 2
 
-(def digit->values
+(def digit->value
   "A map from a digit to its numerical value."
   (zipmap ["1" "2" "3" "4" "5" "6" "7" "8" "9" "one" "two" "three" "four" "five" "six" "seven" "eight" "nine"]
           (take 18 (cycle (range 1 10)))))
 
-(def digits-pattern
+(def number-pattern
   (re-pattern "(?=(one|two|three|four|five|six|seven|eight|nine|\\d))."))
 
 (defn extract-values
-  "Given a line, it extracts the values of all digits and returns them as a seq."
+  "Given a line, it returns all its numbers and as a seq."
   [calibration-line]
   (->> calibration-line
-       (re-seq digits-pattern)
-       (map (comp digit->values second))))
+       (re-seq number-pattern)
+       (map (comp digit->value second))))
 
-(defn p2_extract-calibration-value
+(defn p2_compute-calibration-value
   "Given a line, it returns the calibration value."
   [calibration-line]
   (let [values (extract-values calibration-line)]
@@ -67,11 +67,11 @@
 
 (defn day01-1
   []
-  (day01 p1_extract-calibration-value))
+  (day01 p1_compute-calibration-value))
 
 (defn day01-2
   []
-  (day01 p2_extract-calibration-value))
+  (day01 p2_compute-calibration-value))
 
 (defn -main
   []
